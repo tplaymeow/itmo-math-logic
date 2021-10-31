@@ -15,10 +15,6 @@ pack:
 
 clean:
 	rm -rf out
-	rm -f src/parser/*.java
-
-%Parser.java: %.g4
-	java -jar ${ANTLR} $< 
 
 out/%.class: src/%.java out
 	javac -cp src:${ANTLR} $< -d out
