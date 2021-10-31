@@ -18,6 +18,20 @@ import java.util.ListIterator;
  *    ⟨Переменная⟩ ::= (‘A’...‘Z’) {‘A’...‘Z’ | ‘0’...‘9’ | ‘’’}∗
  */
 public class TreeBuilder {
+   /**
+    * @param lexemes список лексем описывающих логическое выражение
+    * @return Дерево разбора
+    *
+    * Пример: [!, A1, |, !, (, B, ->, C, )] =>
+    *
+    *                    OR
+    *                  /    \
+    *                NOT    NOT
+    *                 |      |
+    *              VAR(A)  IMPL
+    *                      /  \
+    *                 VAR(B)  VAR(C)
+    */
    public TreeNode buildTree(List<Lexeme> lexemes) {
       return expression(lexemes.listIterator());
    }
