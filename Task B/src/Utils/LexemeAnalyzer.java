@@ -46,5 +46,5 @@ public final class LexemeAnalyzer {
         return result;
     }
 
-    private final Pattern variablePattern = Pattern.compile("^[A-Z][A-Z0-9’]*");
+    private final Pattern variablePattern = Pattern.compile("^[A-Z][A-Z0-9’']*");
 }

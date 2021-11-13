@@ -39,7 +39,7 @@ public class Main {
         HashMap<String, Boolean> values = new HashMap<>();
         CalculateTreeNodeVisitor calculateVisitor = new CalculateTreeNodeVisitor(values);
 
-        boolean hasTrue = false, hasFalse = false;
+        int truesCount = 0, falsesCount = 0;
 
         for (int i = 0; i < (1 << variableNames.length); i++) {
             for (int j = 0; j < variableNames.length; j++) {
@@ -47,13 +47,16 @@ public class Main {
                 values.put(variableNames[j], value);
             }
             boolean result = rootNode.accept(calculateVisitor);
-            hasTrue = hasTrue || result;
-            hasFalse = hasFalse || !result;
+            truesCount += result ? 1 : 0;
+            falsesCount += !result ? 1 : 0;
         }
 
-        if (hasTrue && !hasFalse) System.out.println("Valid");
-        else if (hasTrue && hasFalse) System.out.println("Satisfiable and invalid");
-        else if (!hasTrue && hasFalse) System.out.println("Unsatisfiable");
+        if (truesCount != 0 && falsesCount == 0)
+            System.out.println("Valid");
+        else if (truesCount != 0 && falsesCount != 0)
+            System.out.println("Satisfiable and invalid, " + truesCount + " true and " + falsesCount + " false cases");
+        else if (truesCount == 0 && falsesCount != 0)
+            System.out.println("Unsatisfiable");
         else throw new RuntimeException();
     }
 

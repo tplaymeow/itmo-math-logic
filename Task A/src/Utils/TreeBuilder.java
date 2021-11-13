@@ -39,7 +39,7 @@ public class TreeBuilder {
    private static TreeNode expression(ListIterator<Lexeme> lexemes) {
       TreeNode node = or(lexemes);
       while (lexemes.hasNext() && lexemes.next().type == LexemeType.IMPL) {
-         node = new ImplNode(node, or(lexemes));
+         node = new ImplNode(node, expression(lexemes));
       }
       lexemes.previous();
       return node;
